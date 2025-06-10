@@ -1,0 +1,21 @@
+ArtikelNr;ArtBezeichnung;MWST;ArtPreis
+DEL001;Dell XPS 13 Laptop;0.19;1299.99
+APP002;Apple iPhone 13 Pro;0.19;1149.00
+SON003;Sony WH-1000XM4 Kopfhörer;0.19;279.99
+LOG004;Logitech MX Master 3 Maus;0.19;99.99
+COR005;Corsair K95 RGB Platinum Tastatur;0.19;199.95
+LGE006;LG UltraFine 5K Monitor;0.19;1299.00
+CAN007;Canon PIXMA TS8350 Drucker;0.19;149.99
+SAN008;SanDisk Extreme PRO 128GB USB-Stick;0.19;39.95
+WDI009;Western Digital 4TB My Passport;0.19;119.99
+LOG010;Logitech C920 HD Pro Webcam;0.19;79.95
+NVI011;NVIDIA GeForce RTX 3080 Grafikkarte;0.19;699.00
+AMD012;AMD Ryzen 9 5950X Prozessor;0.19;749.99
+COR013;Corsair Vengeance RGB Pro 32GB RAM;0.19;159.95
+SEA014;Seasonic FOCUS GX-750 Netzteil;0.19;129.99
+NZX015;NZXT H510 Elite Gehäuse;0.19;149.95
+PYT001;Python Crash Course, 2nd Edition;0.07;39.99
+JAV002;Java: A Beginner's Guide, 8th Edition;0.07;44.95
+CPP003;C++ Primer, 5th Edition;0.07;54.99
+SQL004;SQL: The Complete Reference, 3rd Edition;0.07;49.95
+CLN005;Clean Code: A Handbook of Agile Software Craftsmanship;0.07;44.99

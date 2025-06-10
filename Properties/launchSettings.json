@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "C#-Konsolenapp": {
+      "commandName": "Project",
+      "commandLineArgs": "S:\\\\Leon-Schneider\\\\repos\\\\C#-Konsolenapp\\\\artikel_neu.csv",
+      "environmentVariables": {
+        "connectionString": "Data Source=MyOracleDB;User Id=myUsername;Password=myPassword;Integrated Security=no;"
+      }
+    }
+  }
+}
