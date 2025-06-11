@@ -4,7 +4,11 @@
       "commandName": "Project",
       "commandLineArgs": "S:\\\\Leon-Schneider\\\\repos\\\\C#-Konsolenapp\\\\artikel_neu.csv",
       "environmentVariables": {
-        "connectionString": "Data Source=MyOracleDB;User Id=myUsername;Password=myPassword;Integrated Security=no;"
+        "db_host": "db-server.s-atiw.de",
+        "db_port": "1521",
+        "db_srvname": "atiwora",
+        "db_username": "fs234_lschneider",
+        "db_password": "leon"
       }
     }
   }
