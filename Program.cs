@@ -1,4 +1,5 @@
 ﻿using Oracle.ManagedDataAccess.Client;
+using System.Text.Json;
 
 namespace C__Konsolenapp {
     internal class Program {
@@ -28,7 +29,7 @@ namespace C__Konsolenapp {
                 }
             }
 
-
+            File.WriteAllText("artikel_new.json", JsonSerializer.Serialize(artikel));
 
             OracleConnectionStringBuilder connBuilder = new OracleConnectionStringBuilder();
             connBuilder.DataSource = String.Format("{0}:{1}/{2}", db_host, db_port, db_srvname);
@@ -37,14 +38,14 @@ namespace C__Konsolenapp {
             using (Oracle.ManagedDataAccess.Client.OracleConnection connection = new(connBuilder.ConnectionString)) {
                 connection.Open();
                 try {
-                foreach (String[] art in artikel) {
-                    var command = new OracleCommand($"INSERT INTO Artikel(ARTNR,ARTBEZEICHNUNG,MWST,ARTPREIS) VALUES (:ARNT,:ARTBEZEICHNUNG,:MWST,:ARTPREIS)", connection);
-                    command.Parameters.Add("ARNT", art[0]);
-                    command.Parameters.Add("ARTBEZEICHNUNG", art[1]);
-                    command.Parameters.Add("MWST", (Double.Parse(art[2])));
-                    command.Parameters.Add("ARTPREIS", (Double.Parse(art[3])));
-                    command.ExecuteNonQuery();
-                }
+                    foreach (String[] art in artikel) {
+                        var command = new OracleCommand($"INSERT INTO Artikel(ARTNR,ARTBEZEICHNUNG,MWST,ARTPREIS) VALUES (:ARTNR,:ARTBEZEICHNUNG,:MWST,:ARTPREIS)", connection);
+                        command.Parameters.Add("ARTNR", art[0]);
+                        command.Parameters.Add("ARTBEZEICHNUNG", art[1]);
+                        command.Parameters.Add("MWST", (Double.Parse(art[2])));
+                        command.Parameters.Add("ARTPREIS", (Double.Parse(art[3])));
+                        command.ExecuteNonQuery();
+                    }
                 } catch (Exception e) {
                     Console.WriteLine(e);
                 }
