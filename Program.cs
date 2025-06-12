@@ -36,6 +36,7 @@ namespace C__Konsolenapp {
             connBuilder.Password = db_password;
             using (Oracle.ManagedDataAccess.Client.OracleConnection connection = new(connBuilder.ConnectionString)) {
                 connection.Open();
+                try {
                 foreach (String[] art in artikel) {
                     var command = new OracleCommand($"INSERT INTO Artikel(ARTNR,ARTBEZEICHNUNG,MWST,ARTPREIS) VALUES (:ARNT,:ARTBEZEICHNUNG,:MWST,:ARTPREIS)", connection);
                     command.Parameters.Add("ARNT", art[0]);
@@ -44,6 +45,10 @@ namespace C__Konsolenapp {
                     command.Parameters.Add("ARTPREIS", (Double.Parse(art[3])));
                     command.ExecuteNonQuery();
                 }
+                } catch (Exception e) {
+                    Console.WriteLine(e);
+                }
+
 
 
                 connection.Close();
