@@ -2,6 +2,41 @@
 using System.Text.Json;
 
 namespace C__Konsolenapp {
+    class Kunde {
+        public int KdNR { get; set; }
+        public string KdAndrede { get; set; }
+        public string KdName { get; set; }
+        public string KdVorname { get; set; }
+        public string KdStraße { get; set; }
+        public string KdPlz { get; set; }
+        public string KdOrt { get; set; }
+
+        public Kunde(int kdNR, string kdAndrede, string kdName, string kdVorname, string kdStraße, string kdPlz, string kdOrt, string v) {
+            KdNR = kdNR;
+            KdAndrede = kdAndrede ?? throw new ArgumentNullException(nameof(kdAndrede));
+            KdName = kdName ?? throw new ArgumentNullException(nameof(kdName));
+            KdVorname = kdVorname ?? throw new ArgumentNullException(nameof(kdVorname));
+            KdStraße = kdStraße ?? throw new ArgumentNullException(nameof(kdStraße));
+            KdPlz = kdPlz ?? throw new ArgumentNullException(nameof(kdPlz));
+            KdOrt = kdOrt ?? throw new ArgumentNullException(nameof(kdOrt));
+        }
+    }
+    class Rechnung {
+        public String RechnungsNr { get; set; }
+        public String RechnungsDatum { get; set; }
+        public Kunde Kunde { get; set; }
+        public bool Bezahlt { get; set; }
+
+
+
+        public Rechnung(string rechnungsNr, string rechnungsDatum, Kunde kunde, bool bezahlt) {
+            this.RechnungsNr = rechnungsNr ?? throw new ArgumentNullException(nameof(rechnungsNr));
+            this.RechnungsDatum = rechnungsDatum ?? throw new ArgumentNullException(nameof(rechnungsDatum));
+            this.Kunde = kunde ?? throw new ArgumentNullException(nameof(kunde));
+            this.Bezahlt = bezahlt;
+        }
+    }
+
     internal class Program {
         private static readonly string db_host = Environment.GetEnvironmentVariable("db_host");
         private static readonly int db_port = int.Parse(Environment.GetEnvironmentVariable("db_port"));
@@ -9,7 +44,9 @@ namespace C__Konsolenapp {
         private static readonly string db_username = Environment.GetEnvironmentVariable("db_username");
         private static readonly string db_password = Environment.GetEnvironmentVariable("db_password");
         static void Main(string[] args) {
-
+            Rechnung rechnung = new(
+                "1", "1.1.2000", new Kunde(1, "Herr", "Thomas", "Junski", "Keine Ahnung Weg", "Düsseldorf", "12345", "1.1.1990"), true
+            );
             List<String[]> artikel = new();
             string file = args[0].ToString();
             if (File.Exists(file)) {
@@ -28,8 +65,8 @@ namespace C__Konsolenapp {
                     Console.WriteLine(line);
                 }
             }
-
             File.WriteAllText("artikel_new.json", JsonSerializer.Serialize(artikel));
+            File.WriteAllText("rechnung_new.json", JsonSerializer.Serialize(rechnung));
 
             OracleConnectionStringBuilder connBuilder = new OracleConnectionStringBuilder();
             connBuilder.DataSource = String.Format("{0}:{1}/{2}", db_host, db_port, db_srvname);
