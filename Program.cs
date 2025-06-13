@@ -1,9 +1,10 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System.Text.Json;
-using system.Xml.Serialization;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace C__Konsolenapp {
-    class Kunde {
+    public class Kunde {
         public int KdNR { get; set; }
         public string KdAndrede { get; set; }
         public string KdName { get; set; }
@@ -21,8 +22,11 @@ namespace C__Konsolenapp {
             KdPlz = kdPlz ?? throw new ArgumentNullException(nameof(kdPlz));
             KdOrt = kdOrt ?? throw new ArgumentNullException(nameof(kdOrt));
         }
+
+        public Kunde() {
+        }
     }
-    class Rechnung {
+    public class Rechnung {
         public String RechnungsNr { get; set; }
         public String RechnungsDatum { get; set; }
         public Kunde Kunde { get; set; }
@@ -35,6 +39,9 @@ namespace C__Konsolenapp {
             this.RechnungsDatum = rechnungsDatum ?? throw new ArgumentNullException(nameof(rechnungsDatum));
             this.Kunde = kunde ?? throw new ArgumentNullException(nameof(kunde));
             this.Bezahlt = bezahlt;
+        }
+
+        public Rechnung() {
         }
     }
 
@@ -66,10 +73,12 @@ namespace C__Konsolenapp {
                     Console.WriteLine(line);
                 }
             }
-            File.WriteAllText("artikel_new.json", JsonSerializer.Serialize(artikel));
-            File.WriteAllText("rechnung_new.json", JsonSerializer.Serialize(rechnung));
-            File.WriteAllText("artikel_new.xml", XmlSerializer.Serialize(artikel));
-            File.WriteAllText("rechnung_new.xml", XmlSerializer.Serialize(rechnung));
+            File.WriteAllText("artikel_new.json", JsonSerializer.Serialize(artikel, new JsonSerializerOptions { WriteIndented = true }));
+            File.WriteAllText("rechnung_new.json", JsonSerializer.Serialize(rechnung, new JsonSerializerOptions { WriteIndented = true }));
+            XmlSerializer xsSubmit = new XmlSerializer(typeof(Rechnung));
+            XmlWriter writer = XmlWriter.Create("output.xml");
+            xsSubmit.Serialize(writer, rechnung);
+
 
             OracleConnectionStringBuilder connBuilder = new OracleConnectionStringBuilder();
             connBuilder.DataSource = String.Format("{0}:{1}/{2}", db_host, db_port, db_srvname);
