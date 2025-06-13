@@ -1,5 +1,6 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System.Text.Json;
+using system.Xml.Serialization;
 
 namespace C__Konsolenapp {
     class Kunde {
@@ -67,6 +68,8 @@ namespace C__Konsolenapp {
             }
             File.WriteAllText("artikel_new.json", JsonSerializer.Serialize(artikel));
             File.WriteAllText("rechnung_new.json", JsonSerializer.Serialize(rechnung));
+            File.WriteAllText("artikel_new.xml", XmlSerializer.Serialize(artikel));
+            File.WriteAllText("rechnung_new.xml", XmlSerializer.Serialize(rechnung));
 
             OracleConnectionStringBuilder connBuilder = new OracleConnectionStringBuilder();
             connBuilder.DataSource = String.Format("{0}:{1}/{2}", db_host, db_port, db_srvname);
